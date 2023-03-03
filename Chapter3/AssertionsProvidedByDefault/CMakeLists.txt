@@ -31,3 +31,5 @@ if(NOT CMAKE_BUILD_TYPE MATCHES Release)
 endif()
 
 create_test(gtest_main1)
+create_test(gtest_main2)
+create_test(gtest_main3)
