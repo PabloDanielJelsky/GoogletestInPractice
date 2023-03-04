@@ -1,5 +1,10 @@
 #	CMakeLists.txt
 
+#	To keep it clean and create all the deliveries in build sub-directory
+#	1)	cmake -S . -B build && cmake --build build
+#	2)	cmake -Bbuild -DCMAKE_BUILD_TYPE=Debug && cd build && make
+#	2.1)	To run test:			make test or ctest
+
 #	Any project's top most CMakeLists.txt must start by specifying a minimum CMake version using the cmake_minimum_required() command.
 #	This establishes policy settings and ensures that the following CMake functions are run with a compatible version of CMake.
 cmake_minimum_required(VERSION 3.1.0)
