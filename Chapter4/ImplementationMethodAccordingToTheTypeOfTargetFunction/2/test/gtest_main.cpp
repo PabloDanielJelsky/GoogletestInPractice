@@ -1,4 +1,4 @@
-//	test/gtest_main1.cpp
+//	test/gtest_main.cpp
 
 #include <iostream>
 #include <string>
@@ -14,7 +14,7 @@
 
 #include "sut.h"
 
-class MockDOC : public DOC
+class MockDOC
 {
 public:
 	MOCK_METHOD1(foo_tc1, std::string(int param));

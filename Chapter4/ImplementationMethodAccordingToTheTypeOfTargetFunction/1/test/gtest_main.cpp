@@ -1,4 +1,4 @@
-//	test/gtest_main1.cpp
+//	test/gtest_main.cpp
 
 #include <iostream>
 #include <string>
