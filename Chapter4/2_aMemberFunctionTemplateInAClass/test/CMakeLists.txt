@@ -11,7 +11,7 @@ if(GCOV AND LCOV AND GENH)
 	set(COVERAGE "-coverage")
 	add_custom_target(coverage
 		COMMAND ${LCOV} -c -d '.' -o 'info' --ignore-errors mismatch --ignore-errors empty
-		COMMAND ${LCOV} -e 'info' '*/1/*' -o 'info' --ignore-errors mismatch --ignore-errors empty
+		COMMAND ${LCOV} -e 'info' '*/2_aMemberFunctionTemplateInAClass/*' -o 'info' --ignore-errors mismatch --ignore-errors empty
 		COMMAND ${LCOV} -r 'info' '*/test/*' -o 'info' --ignore-errors mismatch --ignore-errors empty
 		COMMAND ${GENH} 'info' -o 'coverage' --filter branch --ignore-errors mismatch --ignore-errors empty)
 endif()
