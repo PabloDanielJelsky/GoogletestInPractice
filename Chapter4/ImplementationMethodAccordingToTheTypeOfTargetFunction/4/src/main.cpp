@@ -5,8 +5,8 @@
 
 int main()
 {
-	DOC<int>		doc;
-	SUT<DOC<int>>	sut(doc);
+	MyDOC		obj;
+	SUT<MyDOC>	sut(obj);
 
 	sut.foo();
 

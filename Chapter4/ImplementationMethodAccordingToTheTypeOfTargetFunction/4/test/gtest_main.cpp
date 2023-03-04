@@ -12,32 +12,34 @@
 
 #include "sut.h"
 
-template<typename T>
-class MockDOC
+class MockMyDOC
 {
 public:
-	MOCK_METHOD2(foo_ii, std::string(int param_1, int param_2));
-	MOCK_METHOD2(foo_id, std::string(int param_1, double param_2));
+	MOCK_METHOD1(foo_int, std::string(int param));
+	MOCK_METHOD1(foo_double, std::string(double param));
 
-	template<typename U>
-	std::string foo(T param_1, U param_2) { return "I'm mocked foo (other types)"; }
-
-	std::string foo(int param_1, int param_2) { return foo_ii(param_1, param_2); }
-	std::string foo(int param_1, double param_2) { return foo_id(param_1, param_2); }
+	template<typename T>
+	std::string Foo(T param) { return "I'm mocked foo (other types)"; }
 };
+
+template<>
+std::string MockMyDOC::Foo<int>(int param) { return foo_int(param); }
+
+template<>
+std::string MockMyDOC::Foo<double>(double param) { return foo_double(param); }
 
 TEST(SutTest, UseMock)
 {
 	//	Arrange
-	DOC<int>			doc;
-	SUT<DOC<int>>		sut(doc);
+	MyDOC			obj;
+	SUT<MyDOC>		sut(obj);
 
-	MockDOC<int>		mock_doc;
-	SUT<MockDOC<int>>	mock_sut(mock_doc);
+	MockMyDOC		mock_obj;
+	SUT<MockMyDOC>	mock_sut(mock_obj);
 
 	//	Expect
-	EXPECT_CALL(mock_doc, foo_ii(::testing::_, ::testing::_)).WillOnce(::testing::Return("I'm mocked foo (int, int)"));
-	EXPECT_CALL(mock_doc, foo_id(::testing::_, ::testing::_)).WillOnce(::testing::Return("I'm mocked foo (int, double)"));
+	EXPECT_CALL(mock_obj, foo_int(::testing::_)).WillOnce(::testing::Return("I'm mocked foo (int)"));
+	EXPECT_CALL(mock_obj, foo_double(::testing::_)).WillOnce(::testing::Return("I'm mocked foo (double)"));
 
 	//	Act
 	sut.foo();

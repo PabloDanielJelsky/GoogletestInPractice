@@ -8,14 +8,6 @@
 #include <string>
 
 template<typename T>
-class DOC
-{
-public:
-	template<typename U>
-	std::string foo(T param_1, U param_2)
-	{
-		return "I'm foo : " + std::to_string(param_1) + ", " + std::to_string(param_2);
-	}
-};
+std::string foo(T param) { return "I'm foo : " + std::to_string(param); }
 
 #endif
