@@ -12,7 +12,7 @@
 
 #include "sut.h"
 
-class MockDOC : public DOC
+class MockDOC //: public DOC
 {
 public:
 	MOCK_METHOD0(foo, std::string());
@@ -21,11 +21,11 @@ public:
 TEST(SutTest, UseMock)
 {
 	//	Arrange
-	DOC		doc;
-	SUT		sut(doc);
+	DOC				doc;
+	SUT<DOC>		sut(doc);
 
-	MockDOC	mock_doc;
-	SUT		mock_sut(mock_doc);
+	MockDOC			mock_doc;
+	SUT<MockDOC>	mock_sut(mock_doc);
 
 	//	Expect
 	EXPECT_CALL(mock_doc, foo()).WillRepeatedly(::testing::Return("I'm mocked foo"));
